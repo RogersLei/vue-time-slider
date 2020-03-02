@@ -49,5 +49,16 @@
     "public/*",
     "*.json",
     "*.js"
-  ]
+  ],
+  "keywords": [
+    "vue",
+    "element-ui",
+    "timeline slider"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RogersLei/vue-time-slider.git"
+  },
+  "author": "RogersLei",
+  "license": "ISC"
 }
