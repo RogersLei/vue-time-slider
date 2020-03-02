@@ -1,14 +1,17 @@
 {
-  "name": "vue-timeline-slider",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-time-slider",
+  "version": "1.0.0",
+  "private": false,
+  "main": "dist/timeslider.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build-timeline": "vue-cli-service build --target lib --name timeslider ./src/components/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "element-ui": "^2.13.0",
+    "moment": "^2.24.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -18,6 +21,8 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -37,5 +42,12 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
+  ],
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
   ]
 }
