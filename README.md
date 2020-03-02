@@ -4,13 +4,13 @@
 
 **【如何使用】**
 
-npm install vue-timeline-slider
+npm install vue-time-slider
 ```
 // 在 main.js 中
-import TimelineSlider from "vue-timeline-slider"
-import "vue-timeline-slider/dist/timelineslider.css"
+import TimeSlider from "vue-time-slider"
+import "vue-time-slider/dist/timeslider.css"
 
-Vue.use(TimelineSlider)
+Vue.use(TimeSlider)
 
 ```
 ### 时间轴组件
