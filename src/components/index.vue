@@ -610,7 +610,7 @@ export default {
     },
     emitSelectTime() {
       if ( this.$listeners.changeSelectTime ) {
-        this.$emit( "changeSelectRange", this.currentValue );
+        this.$emit( "changeSelectTime", this.currentValue );
       }
     }
   },

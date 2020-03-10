@@ -36,7 +36,7 @@ Vue.use(TimeSlider)
 11. selectTime: Number 选中的时间
 12. show-select-time-icon: Boolean 是否显示选中时间的icon
 13. changeSelectRange事件  选中范围更改
-14. changeSelectNow事件 选中时间更改
+14. changeSelectTime事件 选中时间更改
 15. is-local: 是否使用本地时间  【可以考虑是否是直接和disabeld 采用同一种方式】
 16. tooltip-effect: 使用element toolitp的主题
 17. max-select-range: 可选择的最大时间范围
