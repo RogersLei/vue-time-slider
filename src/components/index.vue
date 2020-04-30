@@ -31,14 +31,14 @@
                     <div class="timeline__pointer_icon"></div>
                 </el-tooltip>
                 <div class="timeline__pointer_icon" v-else></div>
-                <div class="timeline_custom__label--cur" :style="{visibility: currentValueVisiable ? 'visible': 'hidden', transform: 'translateX(' + currentValueTooltipTransform + '%)'}"> {{ currentValueTooltip }}</div>
+                <div class="timeline_custom__label timeline_custom__label--cur" :style="{visibility: currentValueVisiable ? 'visible': 'hidden', transform: 'translateX(' + currentValueTooltipTransform + '%)'}"> {{ currentValueTooltip }}</div>
             </div>
             <div v-else>
                 <el-tooltip :open-delay="200" :effect="tooltipEffect" placement="top" popper-class="timeline_custom__tooltip" :content="currentValueTooltip" v-if="showTooltip && !dragDom">
                     <div class="timeline_button"></div>
                 </el-tooltip>
                 <div class="timeline_button" v-else></div>
-                <div class="timeline_custom__label--cur" :style="{visibility: currentValueVisiable ? 'visible': 'hidden', transform: 'translateX(' + currentValueTooltipTransform + '%)'}">{{ currentValueTooltip }}</div>
+                <div class="timeline_custom__label timeline_custom__label--cur" :style="{visibility: currentValueVisiable ? 'visible': 'hidden', transform: 'translateX(' + currentValueTooltipTransform + '%)'}">{{ currentValueTooltip }}</div>
             </div>
         </div>
     </div>
