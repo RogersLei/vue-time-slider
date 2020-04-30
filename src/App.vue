@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <timeline-slider :range="[1588223700, 1588226700]" :show-stops="true" :selectRange="[1588226300, 1588226700]"></timeline-slider>
   </div>
 </template>
 

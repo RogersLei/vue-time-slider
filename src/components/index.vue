@@ -9,20 +9,20 @@
                 <div class="timeline_button"></div>
             </el-tooltip>
             <div class="timeline_button" v-else></div>
-            <div class="timeline_custom__label" :style="{visibility: minValueLabelVisiable ? 'visible': 'hidden'}">{{ minValueTooltip }}</div>
+            <div class="timeline_custom__label timeline_custom__label--min" :style="{visibility: minValueLabelVisiable ? 'visible': 'hidden', transform: 'translateX(' + minValueTooltipTransform + '%)'}">{{ minValueTooltip }}</div>
         </div>
         <div class="timeline__range_wrapper rightPoint" :style="{left: maxValuePos + '%' }" v-if="maxValue">
             <el-tooltip :open-delay="200" :effect="tooltipEffect" placement="top" popper-class="timeline_custom__tooltip" :content="maxValueTooltip" v-if="showTooltip && !dragDom">
                 <div class="timeline_button"></div>
             </el-tooltip>
             <div class="timeline_button" v-else></div>
-            <div class="timeline_custom__label" :style="{visibility: maxValueLabelVisiable ? 'visible': 'hidden'}">{{ maxValueTooltip }}</div>
+            <div class="timeline_custom__label timeline_custom__label--max" :style="{visibility: maxValueLabelVisiable ? 'visible': 'hidden', transform: 'translateX(' + maxValueTooltipTransform + '%)'}">{{ maxValueTooltip }}</div>
         </div>
         <div v-if="stops && stops.length > 0 && showStops">
             <div class="timeline__stop" v-for="(item,index) in stops" :key="index" :style="{left: item.percent +'%' }" @click.stop="onSelect($event, item.value)">
             </div>
         </div>
-        <div class="timeline__marks" v-if="stops && stops.length > 0 && showStops && showStopsLabel">
+        <div class="timeline__marks" v-if="stops && stops.length > 0 && showStops && showStopsLabel && ( !maxValueLabelVisiable && !minValueLabelVisiable )">
             <div class="timeline__marks-label" v-for="(item,index) in stops" :key="index" :style="{left: item.percent +'%' }" @click.stop="onSelect($event, item.value)">{{ item.label }}</div>
         </div>
         <div class="timeline__pointer curPoint" :style="{left: currentValuePos + '%' }" v-if="currentValue">
@@ -31,14 +31,14 @@
                     <div class="timeline__pointer_icon"></div>
                 </el-tooltip>
                 <div class="timeline__pointer_icon" v-else></div>
-                <div class="timeline_custom__label" :style="{visibility: currentValueVisiable ? 'visible': 'hidden'}"> {{ currentValueTooltip }}</div>
+                <div class="timeline_custom__label--cur" :style="{visibility: currentValueVisiable ? 'visible': 'hidden', transform: 'translateX(' + currentValueTooltipTransform + '%)'}"> {{ currentValueTooltip }}</div>
             </div>
             <div v-else>
                 <el-tooltip :open-delay="200" :effect="tooltipEffect" placement="top" popper-class="timeline_custom__tooltip" :content="currentValueTooltip" v-if="showTooltip && !dragDom">
                     <div class="timeline_button"></div>
                 </el-tooltip>
                 <div class="timeline_button" v-else></div>
-                <div class="timeline_custom__label" :style="{visibility: currentValueVisiable ? 'visible': 'hidden'}">{{ currentValueTooltip }}</div>
+                <div class="timeline_custom__label--cur" :style="{visibility: currentValueVisiable ? 'visible': 'hidden', transform: 'translateX(' + currentValueTooltipTransform + '%)'}">{{ currentValueTooltip }}</div>
             </div>
         </div>
     </div>
@@ -189,6 +189,10 @@ export default {
       leftPoint:null,
       rightPoint: null,
       curPoint: null,
+
+      minValueTooltipTransform: -50,
+      maxValueTooltipTransform: -50,
+      currentValueTooltipTransform: -50,
     };
   },
   computed: {
@@ -309,6 +313,15 @@ export default {
           this.maxValue = max;
         }
       }
+    },
+    minValuePos() {
+      this.changeMinValueTooltipTransform( "minValue" )
+    },
+    maxValuePos() {
+      this.changeMinValueTooltipTransform( "maxValue" )
+    },
+    currentValuePos() {
+      this.changeMinValueTooltipTransform( "currentValue" )
     },
     selectTime() {
       this.currentValue = this.selectTime;
@@ -612,6 +625,24 @@ export default {
       if ( this.$listeners.changeSelectTime ) {
         this.$emit( "changeSelectTime", this.currentValue );
       }
+    },
+    changeMinValueTooltipTransform(type) {
+      let transform = -50
+      let pointWidth = {
+        minValueTooltipWidth: this.$el.querySelector(".timeline_custom__label--min") ? this.$el.querySelector(".timeline_custom__label--min").offsetWidth : 0,
+        maxValueTooltipWidth: this.$el.querySelector(".timeline_custom__label--max") ? this.$el.querySelector(".timeline_custom__label--max").offsetWidth : 0,
+        currentValueTooltipWidth: this.$el.querySelector(".timeline_custom__label--cur") ? this.$el.querySelector(".timeline_custom__label--cur").offsetWidth : 0,
+      }
+      const elWidth = this.$el.offsetWidth
+
+      if ( this[`${type}Pos`] * elWidth / 100 - pointWidth[`${type}TooltipWidth`] / 2 <= 0 ) {
+        transform = Math.abs( ( this[`${type}Pos`] * elWidth / 100 - pointWidth[`${type}TooltipWidth`] / 2 ) / ( pointWidth[`${type}TooltipWidth`] / 2 ) * 50 ) - 50;
+      }
+      if ( this[`${type}Pos`] * elWidth / 100 + pointWidth[`${type}TooltipWidth`] / 2 >= elWidth ) {
+        transform = - ( ( this[`${type}Pos`] * elWidth / 100 + pointWidth[`${type}TooltipWidth`] / 2 - elWidth ) / ( pointWidth[`${type}TooltipWidth`] / 2 ) * 50 ) - 50;
+      }
+
+      this[`${type}TooltipTransform`] = transform
     }
   },
   created() {
