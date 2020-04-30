@@ -22,7 +22,7 @@
             <div class="timeline__stop" v-for="(item,index) in stops" :key="index" :style="{left: item.percent +'%' }" @click.stop="onSelect($event, item.value)">
             </div>
         </div>
-        <div class="timeline__marks" v-if="stops && stops.length > 0 && showStops && showStopsLabel && ( !maxValueLabelVisiable && !minValueLabelVisiable )">
+        <div class="timeline__marks" v-if="stops && stops.length > 0 && showStops && showStopsLabel && ( !maxValueLabelVisiable && !minValueLabelVisiable && !currentValueVisiable )">
             <div class="timeline__marks-label" v-for="(item,index) in stops" :key="index" :style="{left: item.percent +'%' }" @click.stop="onSelect($event, item.value)">{{ item.label }}</div>
         </div>
         <div class="timeline__pointer curPoint" :style="{left: currentValuePos + '%' }" v-if="currentValue">
