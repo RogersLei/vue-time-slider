@@ -755,7 +755,7 @@ export default {
             width: 18px;
 
             .timeline__pointer_icon {
-                background: url('../assets/icon-currentTime.png') no-repeat;
+                background: url('../../assets/icon-currentTime.png') no-repeat;
                 background-size: 100%;
                 width: 18px;
                 height: 26px;
