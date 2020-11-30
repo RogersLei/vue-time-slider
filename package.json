@@ -8,7 +8,7 @@
     "build": "vue-cli-service build",
     "build-timeline": "vue-cli-service build --target lib --name timeslider ./src/components/index.js"
   },
-  "dependencies": {
+  "peerDependencies ": {
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
     "moment": "^2.24.0",
